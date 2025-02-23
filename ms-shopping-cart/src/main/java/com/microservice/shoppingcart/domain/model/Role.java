@@ -7,7 +7,7 @@ import lombok.*;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Rol {
+public class Role {
     private Long id;
-    private String rolName;
+    private String roleName;
 }
