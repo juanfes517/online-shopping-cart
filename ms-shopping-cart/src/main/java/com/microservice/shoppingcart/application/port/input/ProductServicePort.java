@@ -5,7 +5,7 @@ import com.microservice.shoppingcart.domain.model.SelectedProduct;
 
 import java.util.List;
 
-public interface ProductService {
+public interface ProductServicePort {
     List<ProductResponseDTO> getAllProducts();
     SelectedProduct changeAmount(Long productId, Long amount);
 }
