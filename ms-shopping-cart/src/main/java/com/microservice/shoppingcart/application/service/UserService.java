@@ -41,7 +41,7 @@ public class UserService implements UserServicePort, UserDetailsService {
 
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 
-        authorities.add(new SimpleGrantedAuthority("ROLE_".concat(user.getRole().getRoleName()));
+        authorities.add(new SimpleGrantedAuthority("ROLE_".concat(user.getRole().getRoleName())));
 
         return new org.springframework.security.core.userdetails.User(
                 user.getUsername(),
@@ -76,7 +76,7 @@ public class UserService implements UserServicePort, UserDetailsService {
         UserDetails userDetails = this.loadUserByUsername(username);
 
         if (userDetails == null) {
-            throw new BadCredentialsException(String.format("Invalid username or password"));
+            throw new BadCredentialsException("Invalid username or password");
         }
 
         if (!passwordEncoder.matches(password, userDetails.getPassword())) {
