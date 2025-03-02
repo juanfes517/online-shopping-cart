@@ -8,10 +8,14 @@ import com.microservice.shoppingcart.application.exception.UnmodifiableFieldExce
 import com.microservice.shoppingcart.application.port.input.UserServicePort;
 import com.microservice.shoppingcart.application.port.output.UserPersistencePort;
 import com.microservice.shoppingcart.domain.model.User;
+import com.microservice.shoppingcart.infrastructure.security.JwtUtils;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -28,6 +32,7 @@ public class UserService implements UserServicePort, UserDetailsService {
     private final UserPersistencePort userPersistencePort;
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
+    private final JwtUtils jwtUtils;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -51,12 +56,34 @@ public class UserService implements UserServicePort, UserDetailsService {
 
     @Override
     public AuthResponseDTO login(LoginRequestDTO loginRequestDTO) {
-        return null;
+        String username = loginRequestDTO.getUsername();
+        String password = loginRequestDTO.getPassword();
+
+        Authentication authentication = this.authenticate(username, password);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        String accessToken = jwtUtils.createToken(authentication);
+
+        return AuthResponseDTO.builder()
+                .username(username)
+                .message("User loged succesfully")
+                .token(accessToken)
+                .build();
     }
 
     @Override
     public Authentication authenticate(String username, String password) {
-        return null;
+        UserDetails userDetails = this.loadUserByUsername(username);
+
+        if (userDetails == null) {
+            throw new BadCredentialsException(String.format("Invalid username or password"));
+        }
+
+        if (!passwordEncoder.matches(password, userDetails.getPassword())) {
+            throw new BadCredentialsException("Incorrect Password");
+        }
+
+        return new UsernamePasswordAuthenticationToken(username, password, userDetails.getAuthorities());
     }
 
     @Override
