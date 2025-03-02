@@ -7,5 +7,5 @@ import java.util.List;
 public interface RolePersistencePort {
     List<Role> findAll();
     Role save(Role role);
-    Role deleteById(Long id);
+    void deleteById(Long id);
 }
