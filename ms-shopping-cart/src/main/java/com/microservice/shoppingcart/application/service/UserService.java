@@ -87,7 +87,7 @@ public class UserService implements UserServicePort, UserDetailsService {
     }
 
     @Override
-    public User CreateUser(UserRequestDTO userDTO) {
+    public User createUser(UserRequestDTO userDTO) {
         User user = modelMapper.map(userDTO, User.class);
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
 
@@ -95,7 +95,7 @@ public class UserService implements UserServicePort, UserDetailsService {
     }
 
     @Override
-    public User UpdateUser(UserRequestDTO userDTO) {
+    public User updateUser(UserRequestDTO userDTO) {
         if (userDTO.getUsername() == null) {
             throw new UnmodifiableFieldException("The username field cannot be modified");
         }
@@ -120,14 +120,14 @@ public class UserService implements UserServicePort, UserDetailsService {
     }
 
     @Override
-    public User DeleteUser(Long id) {
-        User deletedUser = this.GetUserById(id);
+    public User deleteUser(Long id) {
+        User deletedUser = this.getUserById(id);
         userPersistencePort.delete(deletedUser);
         return deletedUser;
     }
 
     @Override
-    public User GetUserById(Long id) {
+    public User getUserById(Long id) {
         return userPersistencePort.findById(id)
                 .orElseThrow(() -> new NotFoundException("The user was not found"));
     }
