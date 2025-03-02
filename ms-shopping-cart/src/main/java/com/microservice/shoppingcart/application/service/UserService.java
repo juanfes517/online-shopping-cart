@@ -10,7 +10,6 @@ import com.microservice.shoppingcart.application.port.output.UserPersistencePort
 import com.microservice.shoppingcart.domain.model.User;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -84,5 +83,4 @@ public class UserService implements UserServicePort, UserDetailsService {
         return userPersistencePort.findById(id)
                 .orElseThrow(() -> new NotFoundException("The user was not found"));
     }
-
 }
