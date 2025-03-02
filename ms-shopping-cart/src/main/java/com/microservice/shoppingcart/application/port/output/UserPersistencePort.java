@@ -10,5 +10,5 @@ public interface UserPersistencePort {
     Optional<User> findByUsername(String username);
     List<User> findAll();
     User save(User user);
-    void deleteById(User user);
+    void delete(User user);
 }
