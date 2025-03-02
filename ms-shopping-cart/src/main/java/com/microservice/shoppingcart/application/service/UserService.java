@@ -3,12 +3,14 @@ package com.microservice.shoppingcart.application.service;
 import com.microservice.shoppingcart.application.dto.request.LoginRequestDTO;
 import com.microservice.shoppingcart.application.dto.request.UserRequestDTO;
 import com.microservice.shoppingcart.application.dto.response.AuthResponseDTO;
+import com.microservice.shoppingcart.application.exception.NotFoundException;
 import com.microservice.shoppingcart.application.exception.UnmodifiableFieldException;
 import com.microservice.shoppingcart.application.port.input.UserServicePort;
 import com.microservice.shoppingcart.application.port.output.UserPersistencePort;
 import com.microservice.shoppingcart.domain.model.User;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -79,7 +81,8 @@ public class UserService implements UserServicePort, UserDetailsService {
 
     @Override
     public User GetUserById(Long id) {
-        return null;
+        return userPersistencePort.findById(id)
+                .orElseThrow(() -> new NotFoundException("The user was not found"));
     }
 
 }
