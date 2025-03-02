@@ -74,7 +74,7 @@ public class UserService implements UserServicePort, UserDetailsService {
 
     @Override
     public User DeleteUser(Long id) {
-        return null;
+        return userPersistencePort.deleteById(id);
     }
 
     @Override
