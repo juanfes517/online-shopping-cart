@@ -3,6 +3,7 @@ package com.microservice.shoppingcart.application.service;
 import com.microservice.shoppingcart.application.dto.request.LoginRequestDTO;
 import com.microservice.shoppingcart.application.dto.request.UserRequestDTO;
 import com.microservice.shoppingcart.application.dto.response.AuthResponseDTO;
+import com.microservice.shoppingcart.application.exception.UnmodifiableFieldException;
 import com.microservice.shoppingcart.application.port.input.UserServicePort;
 import com.microservice.shoppingcart.application.port.output.UserPersistencePort;
 import com.microservice.shoppingcart.domain.model.User;
@@ -48,7 +49,27 @@ public class UserService implements UserServicePort, UserDetailsService {
 
     @Override
     public User UpdateUser(UserRequestDTO userDTO) {
-        return null;
+        if (userDTO.getUsername() == null) {
+            throw new UnmodifiableFieldException("The username field cannot be modified");
+        }
+        if (userDTO.getEmail() == null) {
+            throw new UnmodifiableFieldException("The email field cannot be modified");
+        }
+
+        User user = userPersistencePort.findByUsername(userDTO.getUsername())
+                .orElseThrow(() -> new UsernameNotFoundException("The username was not found"));
+
+        if (userDTO.getPassword() != null) {
+            user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        }
+        if (userDTO.getFirstName() != null) {
+            user.setFirstName(userDTO.getFirstName());
+        }
+        if (userDTO.getLastName() != null) {
+            user.setLastName(userDTO.getLastName());
+        }
+
+        return userPersistencePort.save(user);
     }
 
     @Override
