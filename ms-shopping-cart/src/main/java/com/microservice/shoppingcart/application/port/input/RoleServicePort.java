@@ -8,4 +8,5 @@ public interface RoleServicePort {
     List<RoleResponseDTO> getAllRoles();
     RoleResponseDTO createRol(String roleName);
     RoleResponseDTO deleteRol(Long id);
+    RoleResponseDTO findRol(Long id);
 }

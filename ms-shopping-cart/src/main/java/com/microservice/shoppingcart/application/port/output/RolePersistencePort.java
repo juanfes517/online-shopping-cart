@@ -8,4 +8,5 @@ public interface RolePersistencePort {
     List<Role> findAll();
     Role save(Role role);
     void deleteById(Long id);
+    Role findById(Long id);
 }
