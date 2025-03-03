@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface ProductServicePort {
     List<ProductResponseDTO> getAllProducts();
-    SelectedProduct changeAmount(Long productId, Long amount);
+    SelectedProduct changeAmount(Long productId, int amount);
 }
