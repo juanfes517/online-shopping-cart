@@ -12,6 +12,8 @@ import java.util.Set;
 @AllArgsConstructor
 public class ShoppingCart {
     private Long id;
+    private String name;
+    private String description;
     private LocalDateTime createdAt;
     private double totalPrice;
     private User user;

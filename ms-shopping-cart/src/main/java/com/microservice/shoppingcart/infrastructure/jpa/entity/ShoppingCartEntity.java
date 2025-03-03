@@ -19,6 +19,12 @@ public class ShoppingCartEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = true, name = "name")
+    private String name;
+
+    @Column(nullable = true, name = "description")
+    private String description;
+
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
