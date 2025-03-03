@@ -1,6 +1,5 @@
 package com.microservice.shoppingcart.domain.model;
 
-import com.microservice.shoppingcart.domain.exception.EmptyShoppingCartException;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -20,10 +19,6 @@ public class ShoppingCart {
 
 
     public void calculateTotalPrice() {
-        if (selectedProducts.isEmpty()) {
-            throw new EmptyShoppingCartException("The shopping cart is empty");
-        }
-
         double total = 0.0;
         for (SelectedProduct selectedProduct : selectedProducts) {
             total += selectedProduct.getPrice() * selectedProduct.getAmount();
