@@ -3,6 +3,7 @@ package com.microservice.shoppingcart.infrastructure.rest.controller;
 import com.microservice.shoppingcart.application.dto.response.RoleResponseDTO;
 import com.microservice.shoppingcart.application.port.input.RoleServicePort;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +23,9 @@ public class RoleController {
 
     @PostMapping("/{role-name}")
     public ResponseEntity<RoleResponseDTO> createRole(@PathVariable(name = "role-name") String roleName) {
-        return ResponseEntity.ok(roleService.createRol(roleName));
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(roleService.createRol(roleName));
     }
 
     @DeleteMapping("{id}")
