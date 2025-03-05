@@ -25,7 +25,7 @@ public class SelectedProductEntity {
     @Column(name = "amount")
     private int amount;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "shopping_cart_id")
     private ShoppingCartEntity shoppingCart;
 }
