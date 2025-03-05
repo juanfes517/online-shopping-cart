@@ -36,6 +36,11 @@ public class ShoppingCartService implements ShoppingCartServicePort {
     }
 
     @Override
+    public ShoppingCart saveShoppingCart(ShoppingCart shoppingCart) {
+        return shoppingCartPersistencePort.save(shoppingCart);
+    }
+
+    @Override
     public ShoppingCart createShoppingCart(ShoppingCartRequestDTO shoppingCartRequestDTO) {
         User user = userService.getUserById(shoppingCartRequestDTO.getUserId());
 
