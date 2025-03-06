@@ -1,6 +1,5 @@
 package com.microservice.shoppingcart.application.port.input;
 
-import com.microservice.shoppingcart.application.dto.request.ShoppingCartRequestDTO;
 import com.microservice.shoppingcart.domain.model.SelectedProduct;
 import com.microservice.shoppingcart.domain.model.ShoppingCart;
 
