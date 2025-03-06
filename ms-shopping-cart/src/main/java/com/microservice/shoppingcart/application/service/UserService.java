@@ -3,11 +3,15 @@ package com.microservice.shoppingcart.application.service;
 import com.microservice.shoppingcart.application.dto.request.LoginRequestDTO;
 import com.microservice.shoppingcart.application.dto.request.UserRequestDTO;
 import com.microservice.shoppingcart.application.dto.response.AuthResponseDTO;
+import com.microservice.shoppingcart.application.dto.response.RoleResponseDTO;
 import com.microservice.shoppingcart.application.exception.NotFoundException;
 import com.microservice.shoppingcart.application.exception.UnmodifiableFieldException;
+import com.microservice.shoppingcart.application.port.input.RoleServicePort;
 import com.microservice.shoppingcart.application.port.input.UserServicePort;
 import com.microservice.shoppingcart.application.port.output.UserPersistencePort;
+import com.microservice.shoppingcart.domain.model.Role;
 import com.microservice.shoppingcart.domain.model.User;
+import com.microservice.shoppingcart.infrastructure.jpa.entity.RoleEntity;
 import com.microservice.shoppingcart.infrastructure.security.JwtUtils;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -30,8 +34,9 @@ import java.util.List;
 public class UserService implements UserServicePort, UserDetailsService {
 
     private final UserPersistencePort userPersistencePort;
-    private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
+    private final RoleServicePort roleServicePort;
+    private final ModelMapper modelMapper;
     private final JwtUtils jwtUtils;
 
     @Override
@@ -68,6 +73,7 @@ public class UserService implements UserServicePort, UserDetailsService {
                 .username(username)
                 .message("User loged succesfully")
                 .token(accessToken)
+                .role(SecurityContextHolder.getContext().getAuthentication().getAuthorities().toString())
                 .build();
     }
 
@@ -89,7 +95,10 @@ public class UserService implements UserServicePort, UserDetailsService {
     @Override
     public User createUser(UserRequestDTO userDTO) {
         User user = modelMapper.map(userDTO, User.class);
+        RoleResponseDTO defaultRoleDTO = modelMapper.map(roleServicePort.findRol(2L), RoleResponseDTO.class);
+
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        user.setRole(modelMapper.map(defaultRoleDTO, Role.class));
 
         return userPersistencePort.save(user);
     }
