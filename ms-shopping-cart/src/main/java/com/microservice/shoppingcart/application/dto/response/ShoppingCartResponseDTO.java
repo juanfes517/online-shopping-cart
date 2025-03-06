@@ -1,6 +1,5 @@
 package com.microservice.shoppingcart.application.dto.response;
 
-import com.microservice.shoppingcart.domain.model.User;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -17,6 +16,6 @@ public class ShoppingCartResponseDTO {
     private String description;
     private LocalDateTime createdAt;
     private double totalPrice;
-    private User user;
+    private UserResponseDTO user;
     private Set<SelectedProductResponseDTO> selectedProducts;
 }
