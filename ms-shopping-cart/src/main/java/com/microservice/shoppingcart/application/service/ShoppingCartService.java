@@ -41,12 +41,12 @@ public class ShoppingCartService implements ShoppingCartServicePort {
     }
 
     @Override
-    public ShoppingCart createShoppingCart(ShoppingCartRequestDTO shoppingCartRequestDTO) {
-        User user = userService.getUserById(shoppingCartRequestDTO.getUserId());
+    public ShoppingCart createShoppingCart(Long userId, String name, String description) {
+        User user = userService.getUserById(userId);
 
         ShoppingCart shoppingCart = ShoppingCart.builder()
-                .name(shoppingCartRequestDTO.getName())
-                .description(shoppingCartRequestDTO.getDescription())
+                .name(name)
+                .description(description)
                 .createdAt(LocalDateTime.now())
                 .user(user)
                 .totalPrice(0)
