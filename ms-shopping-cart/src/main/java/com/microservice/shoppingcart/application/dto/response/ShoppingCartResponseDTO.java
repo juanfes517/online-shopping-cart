@@ -1,4 +1,4 @@
-package com.microservice.shoppingcart.infrastructure.rest.dto.response;
+package com.microservice.shoppingcart.application.dto.response;
 
 import com.microservice.shoppingcart.domain.model.User;
 import lombok.*;
