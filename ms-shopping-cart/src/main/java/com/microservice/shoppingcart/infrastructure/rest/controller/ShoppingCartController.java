@@ -5,7 +5,7 @@ import com.microservice.shoppingcart.application.dto.request.ShoppingCartRequest
 import com.microservice.shoppingcart.application.service.ShoppingCartService;
 import com.microservice.shoppingcart.domain.model.SelectedProduct;
 import com.microservice.shoppingcart.domain.model.ShoppingCart;
-import com.microservice.shoppingcart.infrastructure.rest.dto.response.ShoppingCartResponseDTO;
+import com.microservice.shoppingcart.application.dto.response.ShoppingCartResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
