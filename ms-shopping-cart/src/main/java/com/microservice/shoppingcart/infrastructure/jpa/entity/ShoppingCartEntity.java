@@ -35,6 +35,6 @@ public class ShoppingCartEntity {
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
-    @OneToMany(mappedBy = "shoppingCart", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "shoppingCart")
     private Set<SelectedProductEntity> selectedProducts;
 }

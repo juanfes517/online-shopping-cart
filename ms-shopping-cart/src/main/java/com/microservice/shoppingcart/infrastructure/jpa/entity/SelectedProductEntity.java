@@ -1,5 +1,6 @@
 package com.microservice.shoppingcart.infrastructure.jpa.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,7 +26,8 @@ public class SelectedProductEntity {
     @Column(name = "amount")
     private int amount;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "shopping_cart_id")
+    @JsonIgnore
     private ShoppingCartEntity shoppingCart;
 }
