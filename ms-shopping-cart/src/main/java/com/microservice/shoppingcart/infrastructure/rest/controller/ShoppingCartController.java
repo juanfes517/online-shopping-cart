@@ -1,9 +1,7 @@
 package com.microservice.shoppingcart.infrastructure.rest.controller;
 
-import com.microservice.shoppingcart.application.dto.request.SelectedProductResquestDTO;
 import com.microservice.shoppingcart.application.dto.request.ShoppingCartRequestDTO;
 import com.microservice.shoppingcart.application.service.ShoppingCartService;
-import com.microservice.shoppingcart.domain.model.SelectedProduct;
 import com.microservice.shoppingcart.domain.model.ShoppingCart;
 import com.microservice.shoppingcart.application.dto.response.ShoppingCartResponseDTO;
 import lombok.RequiredArgsConstructor;
@@ -46,23 +44,5 @@ public class ShoppingCartController {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(modelMapper.map(shoppingCart, ShoppingCartResponseDTO.class));
-    }
-
-    @PostMapping("/{shopping-cart-id}/selected-products")
-    public ResponseEntity<ShoppingCartResponseDTO> addProductToShoppingCart(
-            @PathVariable("shopping-cart-id") Long shoppingCartId,@RequestBody SelectedProductResquestDTO selectedProductRequest) {
-        SelectedProduct selectedProduct = modelMapper.map(selectedProductRequest, SelectedProduct.class);
-        ShoppingCart shoppingCartUpdated = shoppingCartService.addProductToShoppingCart(selectedProduct, shoppingCartId);
-
-        return ResponseEntity.ok(modelMapper.map(shoppingCartUpdated, ShoppingCartResponseDTO.class));
-    }
-
-    @DeleteMapping("/{shopping-cart-id}/selected-products")
-    public ResponseEntity<ShoppingCartResponseDTO> removeProductFromShoppingCart(
-            @PathVariable("shopping-cart-id") Long shoppingCartId,@RequestBody SelectedProductResquestDTO selectedProductRequest) {
-        SelectedProduct selectedProduct = modelMapper.map(selectedProductRequest, SelectedProduct.class);
-        ShoppingCart shoppingCartUpdated = shoppingCartService.removeProductFromShoppingCart(selectedProduct, shoppingCartId);
-
-        return ResponseEntity.ok(modelMapper.map(shoppingCartUpdated, ShoppingCartResponseDTO.class));
     }
 }

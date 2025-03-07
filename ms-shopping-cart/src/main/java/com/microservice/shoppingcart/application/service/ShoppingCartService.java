@@ -1,11 +1,9 @@
 package com.microservice.shoppingcart.application.service;
 
-import com.microservice.shoppingcart.application.dto.request.ShoppingCartRequestDTO;
 import com.microservice.shoppingcart.application.exception.NotFoundException;
 import com.microservice.shoppingcart.application.port.input.ShoppingCartServicePort;
 import com.microservice.shoppingcart.application.port.input.UserServicePort;
 import com.microservice.shoppingcart.application.port.output.ShoppingCartPersistencePort;
-import com.microservice.shoppingcart.domain.model.SelectedProduct;
 import com.microservice.shoppingcart.domain.model.ShoppingCart;
 import com.microservice.shoppingcart.domain.model.User;
 import lombok.RequiredArgsConstructor;
@@ -36,11 +34,6 @@ public class ShoppingCartService implements ShoppingCartServicePort {
     }
 
     @Override
-    public ShoppingCart saveShoppingCart(ShoppingCart shoppingCart) {
-        return shoppingCartPersistencePort.save(shoppingCart);
-    }
-
-    @Override
     public ShoppingCart createShoppingCart(Long userId, String name, String description) {
         User user = userService.getUserById(userId);
 
@@ -51,30 +44,6 @@ public class ShoppingCartService implements ShoppingCartServicePort {
                 .user(user)
                 .totalPrice(0)
                 .build();
-
-        return shoppingCartPersistencePort.save(shoppingCart);
-    }
-
-    @Override
-    public ShoppingCart addProductToShoppingCart(SelectedProduct selectedProduct, Long shoppingCartId) {
-        ShoppingCart shoppingCart = getShoppingCart(shoppingCartId);
-        Set<SelectedProduct> selectedProducts = shoppingCart.getSelectedProducts();
-
-        selectedProducts.add(selectedProduct);
-        shoppingCart.setSelectedProducts(selectedProducts);
-        shoppingCart.calculateTotalPrice();
-
-        return shoppingCartPersistencePort.save(shoppingCart);
-    }
-
-    @Override
-    public ShoppingCart removeProductFromShoppingCart(SelectedProduct selectedProduct, Long shoppingCartId) {
-        ShoppingCart shoppingCart = getShoppingCart(shoppingCartId);
-        Set<SelectedProduct> selectedProducts = shoppingCart.getSelectedProducts();
-
-        selectedProducts.remove(selectedProduct);
-        shoppingCart.setSelectedProducts(selectedProducts);
-        shoppingCart.calculateTotalPrice();
 
         return shoppingCartPersistencePort.save(shoppingCart);
     }
