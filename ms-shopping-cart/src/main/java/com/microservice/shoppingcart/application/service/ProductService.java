@@ -38,4 +38,23 @@ public class ProductService implements ProductServicePort {
 
         return selectedProductPersistencePort.save(selectedProduct);
     }
+
+    @Override
+    public ShoppingCart addProductToShoppingCart(Long shoppingCartId, SelectedProduct selectedProduct) {
+        ShoppingCart shoppingCart = shoppingCartService.getShoppingCart(shoppingCartId);
+
+        selectedProduct.setShoppingCart(shoppingCart);
+        selectedProduct.setId(null);
+        shoppingCart.getSelectedProducts().add(selectedProduct);
+        shoppingCart.calculateTotalPrice();
+
+        selectedProductPersistencePort.save(selectedProduct);
+
+        return shoppingCart;
+    }
+
+    @Override
+    public ShoppingCart removeProductFromShoppingCart(Long shoppingCartId, SelectedProduct selectedProduct) {
+        return null;
+    }
 }
