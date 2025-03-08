@@ -8,7 +8,6 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class SelectedProductResponseDTO {
-    private Long id;
     private String productCode;
     private String name;
     private double price;
