@@ -24,7 +24,11 @@ public class ShoppingCartService implements ShoppingCartServicePort {
 
     @Override
     public List<ShoppingCart> getShoppingCarts(Long userId) {
-        return shoppingCartPersistencePort.findAllByUserId(userId);
+        System.out.println("HOlaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+        User user = userService.getUserById(userId);
+        System.out.println(user.getId() + "---------------------" +user.getUsername());
+
+        return shoppingCartPersistencePort.findAllByUser(user);
     }
 
     @Override

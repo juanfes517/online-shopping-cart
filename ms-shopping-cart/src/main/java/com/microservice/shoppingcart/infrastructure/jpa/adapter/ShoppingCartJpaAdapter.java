@@ -2,7 +2,9 @@ package com.microservice.shoppingcart.infrastructure.jpa.adapter;
 
 import com.microservice.shoppingcart.application.port.output.ShoppingCartPersistencePort;
 import com.microservice.shoppingcart.domain.model.ShoppingCart;
+import com.microservice.shoppingcart.domain.model.User;
 import com.microservice.shoppingcart.infrastructure.jpa.entity.ShoppingCartEntity;
+import com.microservice.shoppingcart.infrastructure.jpa.entity.UserEntity;
 import com.microservice.shoppingcart.infrastructure.jpa.repository.ShoppingCartRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -19,8 +21,9 @@ public class ShoppingCartJpaAdapter implements ShoppingCartPersistencePort {
     private final ModelMapper modelMapper;
 
     @Override
-    public List<ShoppingCart> findAllByUserId(Long userId) {
-        return shoppingCartRepository.findAllByUserId(userId).stream()
+    public List<ShoppingCart> findAllByUser(User user) {
+        UserEntity userEntity = modelMapper.map(user, UserEntity.class);
+        return shoppingCartRepository.findAllByUser(userEntity).stream()
                 .map(shoppingCartEntity -> modelMapper.map(shoppingCartEntity, ShoppingCart.class))
                 .toList();
     }

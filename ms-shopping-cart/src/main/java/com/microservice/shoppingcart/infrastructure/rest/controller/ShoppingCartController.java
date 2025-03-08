@@ -20,7 +20,7 @@ public class ShoppingCartController {
     private final ShoppingCartService shoppingCartService;
     private final ModelMapper modelMapper;
 
-    @GetMapping("/{user-id}")
+    @GetMapping("/users/{user-id}")
     public ResponseEntity<List<ShoppingCartResponseDTO>> getShoppingCarts(@PathVariable("user-id") Long userId) {
         List<ShoppingCartResponseDTO> shoppingCarts = shoppingCartService.getShoppingCarts(userId).stream()
                 .map(shoppingCart -> modelMapper.map(shoppingCart, ShoppingCartResponseDTO.class))
