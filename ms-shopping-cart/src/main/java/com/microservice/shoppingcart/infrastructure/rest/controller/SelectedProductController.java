@@ -1,6 +1,7 @@
 package com.microservice.shoppingcart.infrastructure.rest.controller;
 
 import com.microservice.shoppingcart.application.dto.request.SelectedProductResquestDTO;
+import com.microservice.shoppingcart.application.dto.response.SelectedProductResponseDTO;
 import com.microservice.shoppingcart.application.dto.response.ShoppingCartResponseDTO;
 import com.microservice.shoppingcart.application.service.ProductService;
 import com.microservice.shoppingcart.domain.model.SelectedProduct;
@@ -19,9 +20,11 @@ public class SelectedProductController {
     private final ModelMapper modelMapper;
 
     @PatchMapping("{product-code}/amount/{amount}")
-    public ResponseEntity<SelectedProduct> changeAmount(
+    public ResponseEntity<SelectedProductResponseDTO> changeAmount(
             @PathVariable(name = "product-code") String productCode, @PathVariable(name = "amount") Integer amount){
-        return ResponseEntity.ok(productService.changeAmount(productCode, amount));
+        return ResponseEntity.ok(modelMapper.map(
+                productService.changeAmount(productCode, amount), SelectedProductResponseDTO.class)
+        );
     }
 
     @PostMapping("/shopping-carts/{shopping-car-id}")
