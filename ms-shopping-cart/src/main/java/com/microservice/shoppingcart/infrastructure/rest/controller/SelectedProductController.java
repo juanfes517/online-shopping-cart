@@ -18,10 +18,10 @@ public class SelectedProductController {
     private final ProductService productService;
     private final ModelMapper modelMapper;
 
-    @PatchMapping("{selected-products-id}/amount/{amount}")
+    @PatchMapping("{product-code}/amount/{amount}")
     public ResponseEntity<SelectedProduct> changeAmount(
-            @PathVariable(name = "selected-products-id") Long id, @PathVariable(name = "amount") Integer amount){
-        return ResponseEntity.ok(productService.changeAmount(id, amount));
+            @PathVariable(name = "product-code") String productCode, @PathVariable(name = "amount") Integer amount){
+        return ResponseEntity.ok(productService.changeAmount(productCode, amount));
     }
 
     @PostMapping("/shopping-carts/{shopping-car-id}")

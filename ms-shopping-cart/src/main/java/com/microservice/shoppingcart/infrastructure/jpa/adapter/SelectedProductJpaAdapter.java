@@ -18,8 +18,8 @@ public class SelectedProductJpaAdapter implements SelectedProductPersistencePort
     private final ModelMapper modelMapper;
 
     @Override
-    public Optional<SelectedProduct> findById(Long id) {
-        return selectedProductRepository.findById(id)
+    public Optional<SelectedProduct> findByProductCode(String productCode) {
+        return selectedProductRepository.findByProductCode(productCode)
                 .map(selectedProduct -> modelMapper.map(selectedProduct, SelectedProduct.class));
     }
 

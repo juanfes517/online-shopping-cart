@@ -29,8 +29,8 @@ public class ProductService implements ProductServicePort {
     }
 
     @Override
-    public SelectedProduct changeAmount(Long productId, int amount) {
-        SelectedProduct selectedProduct = selectedProductPersistencePort.findById(productId)
+    public SelectedProduct changeAmount(String productCode, int amount) {
+        SelectedProduct selectedProduct = selectedProductPersistencePort.findByProductCode(productCode)
                 .orElseThrow(() -> new NotFoundException("The product was not found"));
 
         selectedProduct.setAmount(amount);

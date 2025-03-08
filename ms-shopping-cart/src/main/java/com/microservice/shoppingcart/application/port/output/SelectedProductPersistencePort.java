@@ -5,6 +5,6 @@ import com.microservice.shoppingcart.domain.model.SelectedProduct;
 import java.util.Optional;
 
 public interface SelectedProductPersistencePort {
-    Optional<SelectedProduct> findById(Long id);
+    Optional<SelectedProduct> findByProductCode(String productCode);
     SelectedProduct save(SelectedProduct selectedProduct);
 }

@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ProductServicePort {
     List<ProductResponseDTO> getAllProducts();
-    SelectedProduct changeAmount(Long productId, int amount);
+    SelectedProduct changeAmount(String productCode, int amount);
     ShoppingCart addProductToShoppingCart(Long shoppingCartId, SelectedProduct selectedProduct);
     ShoppingCart removeProductFromShoppingCart(Long shoppingCartId, SelectedProduct selectedProduct);
 }
