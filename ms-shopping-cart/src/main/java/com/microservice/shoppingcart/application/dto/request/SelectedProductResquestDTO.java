@@ -9,6 +9,7 @@ import lombok.*;
 @Builder
 public class SelectedProductResquestDTO {
     private Long id;
+    private String productCode;
     private String name;
     private double price;
     private int amount;

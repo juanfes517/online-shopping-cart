@@ -20,6 +20,9 @@ public class SelectedProductEntity {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "product-code", unique = true)
+    private String productCode;
+
     @Column(name = "price")
     private double price;
 
