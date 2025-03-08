@@ -105,10 +105,7 @@ public class UserService implements UserServicePort, UserDetailsService {
 
     @Override
     public User updateUser(UserRequestDTO userDTO) {
-        if (userDTO.getUsername() == null) {
-            throw new UnmodifiableFieldException("The username field cannot be modified");
-        }
-        if (userDTO.getEmail() == null) {
+        if (userDTO.getEmail() != null) {
             throw new UnmodifiableFieldException("The email field cannot be modified");
         }
 

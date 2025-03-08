@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 
 @Service
 @Transactional
@@ -24,9 +23,7 @@ public class ShoppingCartService implements ShoppingCartServicePort {
 
     @Override
     public List<ShoppingCart> getShoppingCarts(Long userId) {
-        System.out.println("HOlaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         User user = userService.getUserById(userId);
-        System.out.println(user.getId() + "---------------------" +user.getUsername());
 
         return shoppingCartPersistencePort.findAllByUser(user);
     }
