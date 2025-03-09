@@ -1,6 +1,7 @@
 package com.microservice.inventory.application.port.input;
 
 import com.microservice.inventory.application.dto.request.OrderRequestDTO;
+import com.microservice.inventory.application.dto.response.ProductResponseDTO;
 import com.microservice.inventory.domain.model.Product;
 
 import java.util.List;
