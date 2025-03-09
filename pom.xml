@@ -18,6 +18,7 @@
 
   <modules>
     <module>ms-shopping-cart</module>
+    <module>ms-inventory</module>
   </modules>
 
   <properties>
