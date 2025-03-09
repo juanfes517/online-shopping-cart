@@ -1,5 +1,6 @@
 package com.microservice.inventory.domain.model;
 
+import com.microservice.inventory.domain.exception.InsufficientStockException;
 import lombok.*;
 
 @Builder
@@ -18,7 +19,7 @@ public class Product {
 
     public boolean canPurchase(int quantity) {
         if (availableQuantity < quantity) {
-            throw new IndexOutOfBoundsException("Insufficient stock for " + this.name);
+            throw new InsufficientStockException("Insufficient stock for " + this.name);
         }
         return true;
     }
