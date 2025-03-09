@@ -30,4 +30,9 @@ public class SelectedProductJpaAdapter implements SelectedProductPersistencePort
 
         return modelMapper.map(selectedProductEntity, SelectedProduct.class);
     }
+
+    @Override
+    public void deleteByProductCode(String productCode) {
+        selectedProductRepository.deleteByProductCode(productCode);
+    }
 }

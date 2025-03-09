@@ -7,4 +7,5 @@ import java.util.Optional;
 public interface SelectedProductPersistencePort {
     Optional<SelectedProduct> findByProductCode(String productCode);
     SelectedProduct save(SelectedProduct selectedProduct);
+    void deleteByProductCode(String productCode);
 }

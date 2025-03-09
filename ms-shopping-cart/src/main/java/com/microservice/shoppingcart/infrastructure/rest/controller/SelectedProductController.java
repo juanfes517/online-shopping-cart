@@ -36,4 +36,14 @@ public class SelectedProductController {
                 productService.addProductToShoppingCart(shoppingCarId, selectedProduct), ShoppingCartResponseDTO.class)
         );
     }
+
+    @DeleteMapping("/shopping-carts/{shopping-car-id}")
+    public ResponseEntity<ShoppingCartResponseDTO> removeProductFromShoppingCart(
+            @RequestBody SelectedProductResquestDTO selectedProductRequest, @PathVariable("shopping-car-id") Long shoppingCarId){
+        SelectedProduct selectedProduct = modelMapper.map(selectedProductRequest, SelectedProduct.class);
+
+        return ResponseEntity.ok(modelMapper.map(
+                productService.removeProductFromShoppingCart(shoppingCarId, selectedProduct), ShoppingCartResponseDTO.class)
+        );
+    }
 }

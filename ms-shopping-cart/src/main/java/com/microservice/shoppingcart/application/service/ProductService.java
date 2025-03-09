@@ -7,7 +7,6 @@ import com.microservice.shoppingcart.application.port.input.ShoppingCartServiceP
 import com.microservice.shoppingcart.application.port.output.SelectedProductPersistencePort;
 import com.microservice.shoppingcart.domain.model.SelectedProduct;
 import com.microservice.shoppingcart.domain.model.ShoppingCart;
-import com.microservice.shoppingcart.infrastructure.jpa.entity.ShoppingCartEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -55,6 +54,19 @@ public class ProductService implements ProductServicePort {
 
     @Override
     public ShoppingCart removeProductFromShoppingCart(Long shoppingCartId, SelectedProduct selectedProduct) {
-        return null;
+        ShoppingCart shoppingCart = shoppingCartService.getShoppingCart(shoppingCartId);
+        selectedProductPersistencePort.deleteByProductCode(selectedProduct.getProductCode());
+
+        shoppingCart.getSelectedProducts().stream()
+                .filter(product -> product.getProductCode().equals(selectedProduct.getProductCode()))
+                .findFirst()
+                .ifPresentOrElse(product -> shoppingCart.getSelectedProducts().remove(product),
+                        () -> {
+                            throw new NotFoundException("The product was not found");
+                        });
+
+        shoppingCart.calculateTotalPrice();
+
+        return shoppingCart;
     }
 }
