@@ -49,4 +49,15 @@ public class ControllerAdvice {
                 .timestamp(LocalDateTime.now())
                 .build();
     }
+
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    @ExceptionHandler(BadCredentialsException.class)
+    public ExceptionResponseDTO handleBadCredentialsException(BadCredentialsException e) {
+        log.error(e.getMessage());
+        return ExceptionResponseDTO.builder()
+                .code(String.valueOf(HttpStatus.FORBIDDEN))
+                .message(e.getMessage())
+                .timestamp(LocalDateTime.now())
+                .build();
+    }
 }
