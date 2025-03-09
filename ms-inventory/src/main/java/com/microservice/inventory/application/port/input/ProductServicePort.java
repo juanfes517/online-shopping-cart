@@ -6,7 +6,7 @@ import com.microservice.inventory.domain.model.Product;
 import java.util.List;
 
 public interface ProductServicePort {
-    List<Product> findAllProducts();
+    List<ProductResponseDTO> findAllProducts();
     boolean verifyStockOfProduct(String productCode, int stock);
     void processOrder(OrderRequestDTO order);
 }
