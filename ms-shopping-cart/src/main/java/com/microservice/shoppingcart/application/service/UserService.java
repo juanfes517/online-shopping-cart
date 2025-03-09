@@ -11,7 +11,6 @@ import com.microservice.shoppingcart.application.port.input.UserServicePort;
 import com.microservice.shoppingcart.application.port.output.UserPersistencePort;
 import com.microservice.shoppingcart.domain.model.Role;
 import com.microservice.shoppingcart.domain.model.User;
-import com.microservice.shoppingcart.infrastructure.jpa.entity.RoleEntity;
 import com.microservice.shoppingcart.infrastructure.security.JwtUtils;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
