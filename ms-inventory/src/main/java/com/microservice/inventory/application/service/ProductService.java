@@ -4,7 +4,7 @@ import com.microservice.inventory.application.dto.request.OrderRequestDTO;
 import com.microservice.inventory.application.dto.response.ProductResponseDTO;
 import com.microservice.inventory.application.exception.ProductNotFoundException;
 import com.microservice.inventory.application.port.input.ProductServicePort;
-import com.microservice.inventory.application.port.output.ProductPersisetencePort;
+import com.microservice.inventory.application.port.output.ProductPersistencePort;
 import com.microservice.inventory.domain.model.Product;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -18,7 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductService implements ProductServicePort {
 
-    private final ProductPersisetencePort productPersisetence;
+    private final ProductPersistencePort productPersisetence;
     private final ModelMapper modelMapper;
 
     @Override

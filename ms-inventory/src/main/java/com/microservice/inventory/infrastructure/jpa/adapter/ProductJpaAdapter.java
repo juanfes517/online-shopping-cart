@@ -1,6 +1,6 @@
 package com.microservice.inventory.infrastructure.jpa.adapter;
 
-import com.microservice.inventory.application.port.output.ProductPersisetencePort;
+import com.microservice.inventory.application.port.output.ProductPersistencePort;
 import com.microservice.inventory.domain.model.Product;
 import com.microservice.inventory.infrastructure.jpa.entity.ProductEntity;
 import com.microservice.inventory.infrastructure.jpa.repository.ProductRepository;
@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
-public class ProductJpaAdapter implements ProductPersisetencePort {
+public class ProductJpaAdapter implements ProductPersistencePort {
 
     private final ProductRepository productRepository;
     private final ModelMapper modelMapper;
