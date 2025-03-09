@@ -31,3 +31,8 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### SQL imports ###
+src/main/resources/import.sql
+
+.env
